@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #FDFBF7;
+  --color-paper-shade: #efebe3;
+  --color-forest: #123026;
+  --color-forest-deep: #10231e;
+  --color-forest-mid: #23463c;
+  --color-copper: #b85a42;
+  --color-copper-deep: #8e4a35;
+  --color-sage: #E8E2D9;
+  --color-sage-deep: #d4dcd0;
+  --color-graphite: #272925;
+  --color-muted: #4a4f47;
+  --color-stone: #ddd8ce;
+  --color-danger: #8b2e2e;
+  --color-danger-bg: #f4e4e0;
+  --color-success: #1b5c43;
+  --color-success-bg: #dceadf;
+  --font-heading: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+  --shadow-soft: 0 1px 0 rgb(23 47 40 / 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-graphite);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-copper) 35%, var(--color-paper));
+  color: var(--color-forest-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 80;
+  border-radius: 0.25rem;
+  background: var(--color-forest);
+  color: var(--color-paper);
+  padding: 0.5rem 0.9rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.container-shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1180px;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .container-shell {
+    padding-inline: 1.75rem;
+  }
+}
+
+.prose-docs {
+  color: var(--color-graphite);
+  max-width: 42rem;
+}
+
+.prose-docs > * + * {
+  margin-top: 1.15rem;
+}
+
+.prose-docs h2,
+.prose-docs h3 {
+  color: var(--color-forest);
+  font-family: var(--font-heading);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  scroll-margin-top: 6rem;
+}
+
+.prose-docs h2 {
+  font-size: 1.55rem;
+  margin-top: 2.4rem;
+}
+
+.prose-docs h3 {
+  font-size: 1.2rem;
+  margin-top: 1.8rem;
+}
+
+.prose-docs p,
+.prose-docs li {
+  font-size: 1.02rem;
+}
+
+.prose-docs ul,
+.prose-docs ol {
+  padding-left: 1.25rem;
+}
+
+.prose-docs ul {
+  list-style: disc;
+}
+
+.prose-docs ol {
+  list-style: decimal;
+}
+
+.prose-docs a {
+  color: var(--color-forest);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-copper) 70%, transparent);
+  text-underline-offset: 0.18em;
+}
+
+.prose-docs a:hover {
+  color: var(--color-copper-deep);
+}
+
+.prose-docs code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--color-sage);
+  border-radius: 0.25rem;
+  padding: 0.1em 0.35em;
+}
+
+.prose-docs pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.prose-docs blockquote {
+  border-left: 3px solid var(--color-copper);
+  padding-left: 1rem;
+  color: var(--color-muted);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-copper-deep);
+}
+
+.rule {
+  height: 1px;
+  background: var(--color-stone);
+  border: 0;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
