@@ -47,6 +47,7 @@ export type ServiceEnquiryInput = {
   timeline: string;
   referenceUrl: string;
   privacy: boolean;
+  botcheck?: string;
 };
 
 export const SERVICE_OPTIONS = [
@@ -128,6 +129,7 @@ export type SupportInput = {
   stepsToReproduce: string;
   screenshotUrl: string;
   privacy: boolean;
+  botcheck?: string;
 };
 
 export function validateSupportRequest(input: SupportInput): FieldErrors {
@@ -163,4 +165,8 @@ export function validateSupportRequest(input: SupportInput): FieldErrors {
   if (versionError) errors.themeVersion = versionError;
   if (!input.privacy) errors.privacy = "Confirm you have read the privacy notice.";
   return errors;
+}
+
+export function isHoneypotTriggered(botcheck: string | undefined): boolean {
+  return Boolean(botcheck && botcheck.trim().length > 0);
 }
