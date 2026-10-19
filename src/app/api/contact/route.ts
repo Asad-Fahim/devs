@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { serviceEnquiries } from "@/db/schema";
 import { submitWeb3Forms } from "@/lib/web3forms";
-import { isHoneypotTriggered, validateServiceEnquiry, type ServiceEnquiryInput } from "@/lib/validation";
+import { validateServiceEnquiry, type ServiceEnquiryInput } from "@/lib/validation";
 import { services } from "@/data/services";
 
 export const dynamic = "force-dynamic";
@@ -19,7 +19,6 @@ function readInput(body: Record<string, unknown>): ServiceEnquiryInput {
     timeline: str("timeline"),
     referenceUrl: str("referenceUrl"),
     privacy: Boolean(body.privacy),
-    botcheck: str("botcheck"),
   };
 }
 
@@ -32,10 +31,6 @@ export async function POST(request: Request) {
   }
 
   const input = readInput(json);
-  if (isHoneypotTriggered(input.botcheck)) {
-    return NextResponse.json({ ok: true });
-  }
-
   const errors = validateServiceEnquiry(input);
   if (Object.keys(errors).length > 0) {
     return NextResponse.json({ ok: false, errors }, { status: 400 });

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { supportRequests } from "@/db/schema";
 import { submitWeb3Forms } from "@/lib/web3forms";
-import { isHoneypotTriggered, validateSupportRequest, type SupportInput } from "@/lib/validation";
+import { validateSupportRequest, type SupportInput } from "@/lib/validation";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +20,6 @@ function readInput(body: Record<string, unknown>): SupportInput {
     stepsToReproduce: str("stepsToReproduce"),
     screenshotUrl: str("screenshotUrl"),
     privacy: Boolean(body.privacy),
-    botcheck: str("botcheck"),
   };
 }
 
@@ -33,10 +32,6 @@ export async function POST(request: Request) {
   }
 
   const input = readInput(json);
-  if (isHoneypotTriggered(input.botcheck)) {
-    return NextResponse.json({ ok: true });
-  }
-
   const errors = validateSupportRequest(input);
   if (Object.keys(errors).length > 0) {
     return NextResponse.json({ ok: false, errors }, { status: 400 });
