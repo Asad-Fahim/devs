@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
-import { supportRequests } from "@/db/schema";
 import { submitWeb3Forms } from "@/lib/web3forms";
 import { validateSupportRequest, type SupportInput } from "@/lib/validation";
 
@@ -37,26 +35,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, errors }, { status: 400 });
   }
 
-  try {
-    await db.insert(supportRequests).values({
-      name: input.name.trim(),
-      email: input.email.trim(),
-      themeName: input.themeName.trim(),
-      themeVersion: input.themeVersion.trim() || null,
-      storeUrl: input.storeUrl.trim(),
-      category: input.category,
-      subject: input.subject.trim(),
-      description: input.description.trim(),
-      stepsToReproduce: input.stepsToReproduce.trim() || null,
-      screenshotUrl: input.screenshotUrl.trim() || null,
-    });
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "The support request could not be saved. Please try again." },
-      { status: 500 },
-    );
-  }
-
   const mail = await submitWeb3Forms({
     subject: `[Theme Support] ${input.themeName.trim()} — ${input.subject.trim()}`,
     from_name: input.name.trim(),
@@ -88,7 +66,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        error: "The request was saved but email delivery failed. Try again, or wait for a manual follow-up.",
+        error: "The support request could not be sent. Please try again.",
       },
       { status: 502 },
     );

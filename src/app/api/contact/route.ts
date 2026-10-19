@@ -1,6 +1,4 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
-import { serviceEnquiries } from "@/db/schema";
 import { submitWeb3Forms } from "@/lib/web3forms";
 import { validateServiceEnquiry, type ServiceEnquiryInput } from "@/lib/validation";
 import { services } from "@/data/services";
@@ -38,24 +36,6 @@ export async function POST(request: Request) {
 
   const serviceLabel = services.find((service) => service.slug === input.service)?.navLabel ?? input.service;
 
-  try {
-    await db.insert(serviceEnquiries).values({
-      name: input.name.trim(),
-      email: input.email.trim(),
-      storeUrl: input.storeUrl.trim() || null,
-      service: input.service,
-      description: input.description.trim(),
-      budgetRange: input.budgetRange || null,
-      timeline: input.timeline || null,
-      referenceUrl: input.referenceUrl.trim() || null,
-    });
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "The enquiry could not be saved. Please try again." },
-      { status: 500 },
-    );
-  }
-
   const mail = await submitWeb3Forms({
     subject: `[Service Enquiry] ${serviceLabel} — ${input.name.trim()}`,
     from_name: input.name.trim(),
@@ -85,7 +65,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         ok: false,
-        error: "The enquiry was saved but email delivery failed. Try again, or wait for a manual follow-up.",
+        error: "The enquiry could not be sent. Please try again.",
       },
       { status: 502 },
     );
