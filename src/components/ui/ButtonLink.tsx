@@ -18,15 +18,21 @@ export function ButtonLink({
   children,
   variant = "primary",
   className,
+  target,
+  rel,
 }: {
   href: string;
   children: ReactNode;
   variant?: Variant;
   className?: string;
+  target?: string;
+  rel?: string;
 }) {
   return (
     <Link
       href={href}
+      target={target}
+      rel={rel}
       className={cx(
         "inline-flex min-h-11 items-center justify-center rounded-md px-4 py-2.5 text-sm font-medium no-underline transition-colors",
         styles[variant],

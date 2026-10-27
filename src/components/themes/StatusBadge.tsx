@@ -2,7 +2,7 @@ import { cx } from "@/lib/utils";
 import type { ThemeStatus } from "@/data/themes";
 
 export function StatusBadge({ status }: { status: ThemeStatus }) {
-  const label = status === "published" ? "Theme Store" : "In development";
+  const label = status === "published" ? "Available Now" : "In development";
   return (
     <span
       className={cx(

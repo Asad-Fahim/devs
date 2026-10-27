@@ -50,7 +50,7 @@ export default function ThemesPage() {
                       <h2 className="font-heading text-2xl font-semibold text-forest">{theme.name}</h2>
                       <StatusBadge status={theme.status} />
                     </div>
-                    <span className="text-lg font-semibold text-forest">$199</span>
+                    <span className="text-lg font-semibold text-forest">$99</span>
                   </div>
                   <p className="mt-3 text-muted">{theme.description}</p>
                 </div>

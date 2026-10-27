@@ -69,16 +69,23 @@ export default function QariPage() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <h1 className="font-heading text-4xl font-semibold text-forest md:text-5xl">Qari</h1>
-              <StatusBadge status="development" />
+              <StatusBadge status="published" />
             </div>
             <p className="text-xl text-muted mb-6">An editorial bookshop theme for independent sellers.</p>
             <p className="text-muted mb-8 max-w-xl">
               Qari was born from a simple idea: books deserve a digital storefront as thoughtful as their covers. Designed for independent bookstores, publishers, and literary-focused merchants, Qari brings the warmth of a physical bookshop to the digital realm with editorial layouts, performance-first architecture, and accessibility at its core.
             </p>
             <div className="flex flex-wrap gap-4">
-              <ButtonLink href="#">View Live Demo</ButtonLink>
-              <ButtonLink href="#" variant="secondary">
-                Buy on Shopify
+              <ButtonLink href="https://client-store-custom-theme.myshopify.com" target="_blank" rel="noopener noreferrer">
+                View Live Demo
+              </ButtonLink>
+              <ButtonLink
+                href="https://mohammadasad.gumroad.com/l/qari-shopify-theme"
+                variant="secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Buy Qari on Gumroad
               </ButtonLink>
             </div>
           </div>

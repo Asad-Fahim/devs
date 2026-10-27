@@ -33,7 +33,7 @@ const themeCatalog: Theme[] = [
     description: "An editorial bookshop theme for independent sellers.",
     longDescription:
       "Qari was born from a simple idea: books deserve a digital storefront as thoughtful as their covers. Designed for independent bookstores, publishers, and literary-focused merchants, Qari brings the warmth of a physical bookshop to the digital realm with editorial layouts, performance-first architecture, and accessibility at its core.",
-    status: "development",
+    status: "published",
     coverImage: "/images/themes/qari-theme-laptop-hero.jpg",
     screenshots: [
       {
@@ -79,7 +79,7 @@ const themeCatalog: Theme[] = [
       "Cultural institutions with retail",
     ],
     documentationPath: "/themes/qari/docs",
-    previewNote: "Qari is in development. Screenshots represent the intended design.",
+    previewNote: "An editorial bookshop theme for independent sellers. Built with Shopify OS 2.0.",
   },
 ];
 
@@ -93,7 +93,7 @@ function validateThemeCatalog(catalog: Theme[]): Theme[] {
     seen.add(theme.slug);
     if (!theme.name.trim() || !theme.description.trim() || !theme.longDescription.trim()) throw new Error(`Missing theme details: ${theme.slug}`);
     if (theme.updatedAt && (!/^\d{4}-\d{2}-\d{2}$/.test(theme.updatedAt) || Number.isNaN(Date.parse(theme.updatedAt)))) throw new Error(`Invalid theme date: ${theme.slug}`);
-    if (theme.status === "published" && (!theme.shopifyListingUrl || !theme.shopifyListingUrl.startsWith("https://themes.shopify.com/"))) throw new Error(`Published theme needs verified Shopify listing: ${theme.slug}`);
+    if (theme.status === "published" && theme.shopifyListingUrl && !theme.shopifyListingUrl.startsWith("https://themes.shopify.com/")) throw new Error(`Shopify listing URL must start with https://themes.shopify.com/: ${theme.slug}`);
     if (theme.status === "development" && theme.shopifyListingUrl) throw new Error(`Development theme cannot claim an official listing: ${theme.slug}`);
     if (!theme.documentationPath.includes(theme.slug)) throw new Error(`Theme docs path must include theme slug: ${theme.slug}`);
   }
